@@ -7,6 +7,8 @@ import { useNavigation } from "@react-navigation/native";
 
 const Main = ({ navigation }) => {
 
+
+  
   const [userName, setUserName] = useState('')
   //Equivalente a deepComponentMode
   useEffect(() => {

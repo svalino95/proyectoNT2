@@ -1,29 +1,42 @@
-import 'react-native-gesture-handler'
-import React from 'react';
-import {
-    StatusBar,
-    Text,
-    View,
-    TextInput,
-    Button,
-    Alert,
-} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList } from 'react-native';
+import firebaseService from '../../services/firebase';
 
+const ReservasScreen = () => {
+  const [reservas, setReservas] = useState([]);
 
+  useEffect(() => {
+    const userId = firebaseService.getUser();
+    firebaseService.db.collection('reservas')
+      .where('userName', '==', userId)
+      .get()
+      .then(querySnapshot => {
+        const docs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setReservas(docs);
+      })
+      .catch(error => {
+        console.error('Error al obtener las reservas:', error);
+      });
+  }, []);
 
+  const renderItem = ({ item }) => {
+    return (
+      <View>
+        <Text>Nombre: {item.name}</Text>
+       
+      </View>
+    );
+  };
 
-const Reserva = ({ navigation }) => {
-      
-      
-    
-    return (<View>
-        <Text> { `Vista de reservas`} </Text> 
+  return (
+    <View>
+      <FlatList
+        data={reservas}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
+    </View>
+  );
+};
 
- 
-        
-</View>);
-
-
-}
-
-export default Reserva
+export default ReservasScreen;

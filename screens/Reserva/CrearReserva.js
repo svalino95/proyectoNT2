@@ -4,21 +4,34 @@ import firebaseService from '../../services/firebase';
 
 
 
-export default function CrateReserva() {
- const [name, setName] = useState('');
+function CreateReserva() {
+
+  const userName = firebaseService.getUser();
+
  const [date, setDate] = useState('');
  const [time, setTime] = useState('');
 
-  const handleSubmit = async () => {
+  const crearReserva = async () => {
     try {
-      const data = { name, date };
-      await firebaseService.db.collection('reservas').add(data);
+      // Comprobar si ya hay una reserva para la misma fecha y hora
+      const reservationsRef = firebaseService.db.collection('reservas');
+      const querySnapshot = await reservationsRef
+        .where('date', '==', date)
+        .where('time', '==', time)
+        .get();
+      if (!querySnapshot.empty) {
+        console.log('Ya existe una reserva para esta fecha y hora');
+        return;
+      }
+  
+      // Si no hay ninguna reserva para la misma fecha y hora, guardar la nueva reserva
+      const data = { userName, date, time };
+      await reservationsRef.add(data);
       console.log('Reserva creada');
       // Limpiar el formulario después de guardar
-      setName('');
-      setDate('');
       
-  
+      setDate('');
+      setTime('');
     } catch (error) {
       console.error('Error al crear reserva:', error);
     }
@@ -27,27 +40,30 @@ export default function CrateReserva() {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Crear una reserva</Text>
+      
       <TextInput
         style={styles.input}
-        placeholder="Nombre"
-        value={name}
-        onChangeText={setName}
+        placeholder="Username"
+        value={userName}
+       editable={false}
       />
-      <TextInput
+
+           <TextInput
         style={styles.input}
         placeholder="Fecha (DD/MM/AAAA)"
         value={date}
         onChangeText={setDate}
-
+   
         
       />
       <TextInput
         style={styles.input}
         placeholder="Hora (HH:MM)"
-       
-       
+        value={time}
+        onChangeText={setTime}
+     
       />
-      <Button title="Crear reserva" onPress={handleSubmit} />
+      <Button title="Crear reserva" onPress={crearReserva} />
     </View>
   );
 }
@@ -72,3 +88,5 @@ const styles = StyleSheet.create({
     width: '80%',
   },
 });
+
+export default CreateReserva; 
