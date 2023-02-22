@@ -13,6 +13,7 @@ const ReservasScreen = () => {
       .then(querySnapshot => {
         const docs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setReservas(docs);
+
       })
       .catch(error => {
         console.error('Error al obtener las reservas:', error);
@@ -22,8 +23,9 @@ const ReservasScreen = () => {
   const renderItem = ({ item }) => {
     return (
       <View>
-        <Text>Nombre: {item.name}</Text>
-       
+        <Text>Nombre: {item.userName}</Text>
+        <Text>Fecha: {item.date}</Text>
+        <Text>Hora: {item.time}</Text>
       </View>
     );
   };
