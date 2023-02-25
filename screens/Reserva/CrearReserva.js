@@ -4,6 +4,15 @@ import firebaseService from '../../services/firebase';
 
 
 
+const validateTime = (time) => {
+  const [hour, minute] = time.split(':');
+  const numericHour = parseInt(hour, 10);
+  if (numericHour < 10 || numericHour > 22) {
+    return false;
+  }
+  return true;
+}
+
 function CreateReserva() {
 
   const userName = firebaseService.getUser();
@@ -11,30 +20,35 @@ function CreateReserva() {
  const [date, setDate] = useState('');
  const [time, setTime] = useState('');
 
-  const crearReserva = async () => {
-    try {
-      // Comprobar si ya hay una reserva para la misma fecha y hora
-      const reservationsRef = firebaseService.db.collection('reservas');
-      const querySnapshot = await reservationsRef
-        .where('date', '==', date)
-        .where('time', '==', time)
-        .get();
-      if (!querySnapshot.empty) {
-        console.log('Ya existe una reserva para esta fecha y hora');
-        return;
-      }
-  
-      // Si no hay ninguna reserva para la misma fecha y hora, guardar la nueva reserva
-      const data = { userName, date, time };
-      await reservationsRef.add(data);
-      console.log('Reserva creada');
-      // Limpiar el formulario después de guardar
-      
-      setDate('');
-      setTime('');
-    } catch (error) {
-      console.error('Error al crear reserva:', error);
+ const crearReserva = async () => {
+  try {
+    // Comprobar si ya hay una reserva para la misma fecha y hora
+    const reservationsRef = firebaseService.db.collection('reservas');
+    const querySnapshot = await reservationsRef
+      .where('date', '==', date)
+      .where('time', '==', time)
+      .get();
+    if (!querySnapshot.empty) {
+      console.log('Ya existe una reserva para esta fecha y hora');
+      return;
     }
+
+    // Validar que la hora sea válida
+    if (!validateTime(time)) {
+      console.log('La hora ingresada no es válida');
+      return;
+    }
+  
+    // Si no hay ninguna reserva para la misma fecha y hora y la hora es válida, guardar la nueva reserva
+    const data = { userName, date, time };
+    await reservationsRef.add(data);
+    console.log('Reserva creada');
+    // Limpiar el formulario después de guardar
+    setDate('');
+    setTime('');
+  } catch (error) {
+    console.error('Error al crear reserva:', error);
+  }
   };
   
   return (
