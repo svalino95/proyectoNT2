@@ -4,12 +4,12 @@ import {NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 //pantallas
-import Login from './screens/Login/Login'
-import SignUp from './screens/SignUp/SingUp'
+import Login from './screens/Users/SignUp/Login/Login'
+import SignUp from './screens/Users/SignUp/SingUp'
 import Main from './screens/Main/Main'
 import Reserva from './screens/Reserva/Reserva'
 import CrearReserva from './screens/Reserva/CrearReserva'
-import SettingScreen from "./screens/Home/SettingScreen";
+import SettingScreen from "./screens/Users/SettingScreen";
 
 
 const Tab = createBottomTabNavigator();

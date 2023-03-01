@@ -2,7 +2,7 @@ import 'react-native-gesture-handler'
 import React, { useState } from 'react';
 import { Text, View ,TouchableHighlight, StyleSheet, ImageBackground} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
-import firebaseService from '../../services/firebase';
+import firebaseService from '../../../../services/firebase';
 
 const Login = ({navigation}) =>{
   const [user, setUser] = useState('')

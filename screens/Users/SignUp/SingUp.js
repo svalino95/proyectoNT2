@@ -3,7 +3,7 @@ import 'react-native-gesture-handler'
 import React, { useState } from 'react';
 import { Text, View, TouchableHighlight, StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
-import firebaseService from '../../services/firebase';
+import firebaseService from '../../../services/firebase';
 
 const SignUp = ({ navigation }) => {
   const [name, setName] = useState('')

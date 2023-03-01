@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet , Alert} from 'react-native';
 import firebaseService from '../../services/firebase';
 
 
@@ -30,6 +30,8 @@ const status = 'Aceptada'
       .get();
     if (!querySnapshot.empty) {
       console.log('Ya existe una reserva para esta fecha y hora');
+      Alert.alert('Aviso', 'Ya existe una reserva para esta fecha y hora');
+
       return;
     }
 
@@ -43,6 +45,8 @@ const status = 'Aceptada'
     const data = { userName, date, time , status};
     await reservationsRef.add(data);
     console.log('Reserva creada');
+    Alert.alert('Aviso', 'Reserva creada con exito');
+
     // Limpiar el formulario después de guardar
     setDate('');
     setTime('');
