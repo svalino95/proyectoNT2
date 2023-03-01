@@ -19,7 +19,7 @@ function CreateReserva() {
 
  const [date, setDate] = useState('');
  const [time, setTime] = useState('');
-
+const status = 'Aceptada'
  const crearReserva = async () => {
   try {
     // Comprobar si ya hay una reserva para la misma fecha y hora
@@ -38,9 +38,9 @@ function CreateReserva() {
       console.log('La hora ingresada no es válida');
       return;
     }
-  
+    
     // Si no hay ninguna reserva para la misma fecha y hora y la hora es válida, guardar la nueva reserva
-    const data = { userName, date, time };
+    const data = { userName, date, time , status};
     await reservationsRef.add(data);
     console.log('Reserva creada');
     // Limpiar el formulario después de guardar

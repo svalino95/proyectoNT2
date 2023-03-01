@@ -28,10 +28,17 @@ const Main = ({ navigation }) => {
 
 
   return (
+
+    
+    
     <View style={styles.container}>
-      <Text> {`Bienvenidos ${userName} a Alquileres De Canchas!`} </Text>
+      
+      <Text style={styles.tittle}> {`Bienvenidos ${userName} a Alquileres De Canchas!`} </Text>
+      
+
 
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Reserva")} >
+        
         <Text style={styles.textButton}>VER RESERVAS</Text>
       </TouchableOpacity>
     
@@ -48,10 +55,8 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    marginTop: 20,
-    marginHorizontal: 10,
     justifyContent: 'center'
- 
+    
 
   },
   inputText: {
@@ -63,15 +68,27 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
 
   },
+  tittle: {
+    height: 30,
+    borderWidth: 1,
+    paddingHorizontal: 50,
+    color: 'black',
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    marginBottom: 100,
+
+  },
   button: {
 
     elevation: 8,
-    backgroundColor: "blue",
+    backgroundColor: "#1e88e5",
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    marginBottom: 25
-   
+    marginBottom: 25,
+    marginHorizontal: 50,
+    justifyContent: 'center'
+    
   },
   textButton: {
     color: 'white',

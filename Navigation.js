@@ -10,7 +10,6 @@ import Main from './screens/Main/Main'
 import Reserva from './screens/Reserva/Reserva'
 import CrearReserva from './screens/Reserva/CrearReserva'
 import SettingScreen from "./screens/Home/SettingScreen";
-import HomeScreen from "./screens/Home/HomeScreen";
 
 
 const Tab = createBottomTabNavigator();
@@ -18,7 +17,7 @@ const Stack = createStackNavigator();
 
 function MyStack() {    
     return(
-<Stack.Navigator initialRouteName = "Login">
+<Stack.Navigator screenOptions = {{headerShown: false}}   initialRouteName = "Login" >
 
     <Stack.Screen name = "Login" component={Login}></Stack.Screen>
     <Stack.Screen name = "SignUp" component={SignUp}></Stack.Screen>
@@ -34,13 +33,10 @@ function MyStack() {
 function MyTabs() {
   return (
 
-    <Tab.Navigator>
-        <Tab.Screen name ="MinMenu" component={MyStack}/>
-          <Tab.Screen name ="Home" component={HomeScreen}/>
-        
+    <Tab.Navigator screenOptions = {{headerShown: false}} >
+        <Tab.Screen name ="Home" component={MyStack}/>
+          <Tab.Screen name ="Setting" component={SettingScreen}/>
       
-
-        
     </Tab.Navigator>
     
   );
