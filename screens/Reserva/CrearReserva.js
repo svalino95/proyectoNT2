@@ -31,7 +31,7 @@ const status = 'Aceptada'
     if (!querySnapshot.empty) {
       console.log('Ya existe una reserva para esta fecha y hora');
       Alert.alert('Aviso', 'Ya existe una reserva para esta fecha y hora');
-
+    
       return;
     }
 
@@ -40,6 +40,8 @@ const status = 'Aceptada'
       console.log('La hora ingresada no es válida');
       return;
     }
+
+    
     
     // Si no hay ninguna reserva para la misma fecha y hora y la hora es válida, guardar la nueva reserva
     const data = { userName, date, time , status};
@@ -71,15 +73,14 @@ const status = 'Aceptada'
         placeholder="Fecha (DD/MM/AAAA)"
         value={date}
         onChangeText={setDate}
-   
-        
+        required={true}
       />
       <TextInput
         style={styles.input}
         placeholder="Hora (HH:MM)"
         value={time}
         onChangeText={setTime}
-     
+        required={true}
       />
       <Button title="Crear reserva" onPress={crearReserva} />
     </View>
