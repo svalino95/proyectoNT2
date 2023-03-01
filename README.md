@@ -17,7 +17,11 @@ Front - React Native
   - Editar reserva
   - Cancelar reservas
 
-Este proyecto fue realizado de manera individual y aplicando los conceptos vistos con el Profesor Daniel De Jesus 
+Adicionales:
+
+Se utiliza Firebase Database para almacenar las reservas.
+
+Este proyecto fue realizado de manera individual y aplicando los conceptos vistos con el Profesor Daniel De Jesus.
 
 
 
