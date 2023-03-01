@@ -1,14 +1,15 @@
 # proyectoNT2
 
-Aplicación desarrollada por Santiago Valiño Silva para Nuevas Tecnologias 2
+Aplicación desarrollada por Santiago Valiño Silva para Nuevas Tecnologias 2 - ORT
 
-Alcance - Reserva Cancha
+App - Reserva de Canchas de Futbol
+
+
 	
 Front - React Native 
 	
-
-Login (Google Firebase) (Token de persistencia)
-
+	
+  - Login (Google Firebase) (Token de persistencia)
   - Registro
   - Pantalla de reservas
   - Crear reserva
