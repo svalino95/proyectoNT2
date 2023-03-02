@@ -1,13 +1,19 @@
 import 'react-native-gesture-handler'
 import React, { useState } from 'react';
-import { Text, View ,TouchableHighlight, StyleSheet, ImageBackground} from 'react-native';
+import { Text, View ,TouchableHighlight, StyleSheet, Image} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
-import firebaseService from '../../../../services/firebase';
+import firebaseService from '../../../services/firebase';
+import { BackgroundImage } from 'react-native-elements/dist/config';
+
+const image = {uri: 'https://cloudfront-us-east-1.images.arcpublishing.com/infobae/7LSTPKQ7GRGRBFZEFS5HRXWFTU.jpg'};
+
 
 const Login = ({navigation}) =>{
   const [user, setUser] = useState('')
   const [pass, setPass] = useState('')
 
+
+  
 const onPressLogin = async () => {
 try {
   await firebaseService.login(user, pass)
@@ -18,9 +24,10 @@ try {
 }
 
     return (
-   
+      <BackgroundImage source={image} style={styles.image} >
     <View style = {styles.container}>
-      <View>
+      
+      <View >
       <TextInput 
       placeholder = "Email"
       style = {styles.inputText}
@@ -36,16 +43,25 @@ try {
       onChange = {(e) => setPass(e.nativeEvent.text) } 
       />
       </View>
-
+     
       <TouchableHighlight style = {styles.button} onPress={onPressLogin}>
         <Text style = {styles.textButton} >Login</Text>
       </TouchableHighlight>
       <TouchableHighlight style = {styles.button}  onPress={() => navigation.navigate('SignUp')}>
         <Text style = {styles.textButton} >Crear nuevo Usuario</Text>
       </TouchableHighlight>
+     
     </View> 
+    </BackgroundImage>
   );
   }
+
+  Login.navigationOptions = ({ navigation }) => {
+    return {
+      tabBarVisible: false,
+    };
+  };
+  
 
  export default Login
 
@@ -88,5 +104,9 @@ try {
     resizeMode: 'cover', // o 'stretch' para ajustar la imagen a todo el fondo
     width: '100%',
     height: '100%'
-  }
+  },
+  image: {
+    flex: 1,
+    justifyContent: 'center',
+  },
 });

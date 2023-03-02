@@ -4,9 +4,11 @@ import React from 'react';
 import { Text, View, TouchableHighlight, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import firebaseService from '../../services/firebase';
 import { useNavigation } from "@react-navigation/native";
+import { BackgroundImage } from 'react-native-elements/dist/config';
 
 const Main = ({ navigation }) => {
 
+  const image = {uri: 'https://images.unsplash.com/photo-1543351611-58f69d7c1781?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MjB8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80'};
 
   
   const [userName, setUserName] = useState('')
@@ -30,7 +32,7 @@ const Main = ({ navigation }) => {
   return (
 
     
-    
+    <BackgroundImage source={image} resizeMode="cover" style={styles.image}> 
     <View style={styles.container}>
       
       <Text style={styles.tittle}> {`Bienvenidos ${userName} a Alquileres De Canchas!`} </Text>
@@ -48,6 +50,7 @@ const Main = ({ navigation }) => {
 
      
     </View>
+    </BackgroundImage>
   );
 }
 
@@ -65,7 +68,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingHorizontal: 20,
     color: 'black',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    
 
   },
   tittle: {
@@ -73,10 +77,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 50,
     color: 'black',
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    marginBottom: 100,
+    justifyContent: 'flex-end',
+    marginBottom: 300,
+    fontSize: 20,
 
+  },
+  image: {
+    flex: 1,
+    justifyContent: 'center',
   },
   button: {
 
