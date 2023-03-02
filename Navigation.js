@@ -22,7 +22,7 @@ const MyTheme = {
   colors: {
     ...DefaultTheme.colors,
     primary: 'black',
-    card: 'rgb(111,0,255)',
+    card: '#8a2be2',
     
 
   },
@@ -32,7 +32,7 @@ const MyTheme = {
 function MyStack() {    
     return(
       
-<Stack.Navigator screenOptions = {{headerShown: false}}   initialRouteName = ""  >
+<Stack.Navigator screenOptions = {{headerShown: false}}   initialRouteName = "Login"  >
 
     <Stack.Screen name = "Main" component={Main}></Stack.Screen>
     <Stack.Screen name = "Login" component={Login}></Stack.Screen>
@@ -53,9 +53,9 @@ function MyTabs() {
     <Tab.Navigator 
     screenOptions = {{headerShown: false }  }   >
 
-      <Tab.Screen name ="LogOut" component={Login} options={{ tabBarStyle: { display: 'none' } }}/>
+        <Tab.Screen name ="LogOut" component={Login} options={{ tabBarStyle: { display: 'none' } }}/>
         <Tab.Screen name ="Home" component={MyStack} />
-          <Tab.Screen name ="Setting" component={SettingScreen} />
+        <Tab.Screen name ="Setting" component={SettingScreen} />
           
 
     </Tab.Navigator>
@@ -68,7 +68,7 @@ export default function Navigation() {
       
       <NavigationContainer theme={MyTheme}>
   
-  <MyTabs/>
+  <MyStack/>
   
   
       </NavigationContainer>

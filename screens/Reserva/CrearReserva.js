@@ -20,7 +20,9 @@ function CreateReserva() {
  const [date, setDate] = useState('');
  const [time, setTime] = useState('');
 const status = 'Aceptada'
- const crearReserva = async () => {
+
+
+const crearReserva = async () => {
   try {
     // Comprobar si ya hay una reserva para la misma fecha y hora
     const reservationsRef = firebaseService.db.collection('reservas');
@@ -31,7 +33,6 @@ const status = 'Aceptada'
     if (!querySnapshot.empty) {
       console.log('Ya existe una reserva para esta fecha y hora');
       Alert.alert('Aviso', 'Ya existe una reserva para esta fecha y hora');
-    
       return;
     }
 
@@ -41,13 +42,30 @@ const status = 'Aceptada'
       return;
     }
 
-    
-    
+    // Validar que la fecha sea válida y no anterior al día actual
+    const dateFormat = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+    if (!dateFormat.test(date)) {
+      console.log('Formato de fecha inválido');
+      return;
+    }
+
+    const [day, month, year] = date.split('/');
+    const numericYear = parseInt(year, 10);
+    const numericMonth = parseInt(month, 10) - 1; // Los meses en Date empiezan en 0
+    const numericDay = parseInt(day, 10);
+    const selectedDate = new Date(numericYear, numericMonth, numericDay);
+    const currentDate = new Date();
+
+    if (selectedDate < currentDate) {
+      console.log('La fecha ingresada no puede ser anterior al día actual');
+      return;
+    }
+
     // Si no hay ninguna reserva para la misma fecha y hora y la hora es válida, guardar la nueva reserva
     const data = { userName, date, time , status};
     await reservationsRef.add(data);
     console.log('Reserva creada');
-    Alert.alert('Aviso', 'Reserva creada con exito');
+    Alert.alert('Aviso', 'Reserva creada con éxito');
 
     // Limpiar el formulario después de guardar
     setDate('');
@@ -55,7 +73,7 @@ const status = 'Aceptada'
   } catch (error) {
     console.error('Error al crear reserva:', error);
   }
-  };
+};
   
   return (
     <View style={styles.container}>
@@ -77,7 +95,7 @@ const status = 'Aceptada'
       />
       <TextInput
         style={styles.input}
-        placeholder="Hora (HH:MM)"
+        placeholder="Hora (HH)"
         value={time}
         onChangeText={setTime}
         required={true}
@@ -92,6 +110,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#ffe4c4'
   },
   heading: {
     fontSize: 24,

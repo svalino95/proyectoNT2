@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginHorizontal: 10,
     justifyContent: 'center',
-    
+    backgroundColor: '#faebd7'
   },
   inputText : {
       height: 50,

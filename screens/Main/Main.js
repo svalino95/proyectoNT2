@@ -35,7 +35,7 @@ const Main = ({ navigation }) => {
     <BackgroundImage source={image} resizeMode="cover" style={styles.image}> 
     <View style={styles.container}>
       
-      <Text style={styles.tittle}> {`Bienvenidos ${userName} a Alquileres De Canchas!`} </Text>
+      <Text style={styles.tittle}> {`Bienvenidos ${userName} a Alquileres de Canchas!`} </Text>
       
 
 
@@ -47,7 +47,9 @@ const Main = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("CrearReserva")} >
         <Text style={styles.textButton}>CREAR RESERVA</Text>
       </TouchableOpacity>
-
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Login")} >
+        <Text style={styles.textButton}>Cerrar sesion</Text>
+      </TouchableOpacity>
      
     </View>
     </BackgroundImage>
@@ -73,13 +75,10 @@ const styles = StyleSheet.create({
 
   },
   tittle: {
-    height: 30,
-    borderWidth: 1,
-    paddingHorizontal: 50,
-    color: 'black',
-    justifyContent: 'flex-end',
+    paddingHorizontal: 40,
+    justifyContent: 'center',
     marginBottom: 300,
-    fontSize: 20,
+    fontSize: 17.5,
 
   },
   image: {
@@ -105,4 +104,5 @@ const styles = StyleSheet.create({
   }
 
 })
+
 export default Main

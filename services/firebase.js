@@ -59,12 +59,14 @@ class Firebase {
     return this.db.collection(collection).doc(id).delete();
   };
 
+  
+
 
     getUser = () => {
         return this.auth.currentUser.displayName
     }
 
-
+    
 
 }
 
